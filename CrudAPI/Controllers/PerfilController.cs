@@ -1,6 +1,7 @@
 using CrudAPI.Context;
 using CrudAPI.DTOs;
 using CrudAPI.Entities;
+using CrudAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,20 +11,18 @@ namespace CrudAPI.Controllers
     [ApiController]
     public class PerfilController : ControllerBase
     {
-        private AppDbContext _context;
+        private readonly PerfilService _perfilService;
 
-        public PerfilController(AppDbContext context)
+        public PerfilController(PerfilService perfilService)
         {
-            _context = context;
+            _perfilService = perfilService;
+          
         }
 
         [HttpGet]
         [Route("lista")]
         public async Task<ActionResult<List<PerfilDTO>>> Get() =>
-            Ok(await _context
-                .Perfiles
-                .Select(p => new PerfilDTO(p.IdPerfil, p.Nombre))
-                .ToListAsync());
+            Ok(await _perfilService.ObtenerListaAsync());
       
     }
     
