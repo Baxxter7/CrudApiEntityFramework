@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 builder.Services.AddScoped<PerfilService>();
+builder.Services.AddScoped<EmpleadoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
